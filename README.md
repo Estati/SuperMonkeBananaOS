@@ -1,4 +1,4 @@
-# Up and Down
+# Super Monke
 who remembers WristMenu?
 # How to use
 Hold B is fly
