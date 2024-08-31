@@ -35,7 +35,7 @@ namespace SuperMonkeBananaOS
             BuildMenuOptions.AppendLine("");
             BuildMenuOptions.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "[Force : " + force + "]"));
             return BuildMenuOptions.ToString();
-
+          
         }
         float force;
         public static bool NoGravBool;
@@ -58,14 +58,14 @@ public override void OnButtonPressed(WatchButtonType buttonType)
                     if (selectionHandler.currentIndex == 1)
                     {
                         if (force > 25)
-                            force = -1f;
+                            force -= 1f;
                     }
                     break;
                 case WatchButtonType.Left:
                     if (selectionHandler.currentIndex == 1)
                     {
                         if (force < 1)
-                            force = +1f;
+                            force += 1f;
                     }
                     break;
 
