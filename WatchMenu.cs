@@ -57,15 +57,15 @@ public override void OnButtonPressed(WatchButtonType buttonType)
                 case WatchButtonType.Right:
                     if (selectionHandler.currentIndex == 1)
                     {
-                        if (force < 25)
-                            force = +1f;
+                        if (force > 25)
+                            force = -1f;
                     }
                     break;
                 case WatchButtonType.Left:
                     if (selectionHandler.currentIndex == 1)
                     {
-                        if (force > 1)
-                            force = -1f;
+                        if (force < 1)
+                            force = +1f;
                     }
                     break;
 
