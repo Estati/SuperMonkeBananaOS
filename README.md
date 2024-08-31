@@ -1,9 +1,9 @@
 # Up and Down
 who remembers WristMenu?
 # How to use
-B is fly
+Hold B is fly
 
-A is ZeroG
+Hold A is ZeroG
 # Requirments
 Utilla
 
