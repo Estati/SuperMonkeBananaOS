@@ -1,6 +1,5 @@
 ﻿using BananaOS;
 using BananaOS.Pages;
-using EasyInputsClass;
 using Photon.Pun;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using Utilla;
 
 namespace SuperMonkeBananaOS
 {
-    internal class WatchMenu:WatchPage
+    internal class WatchMenu : WatchPage
     {
         public override string Title => "<color=red>Super</color><color=blue>Monke</color>";
         public override bool DisplayOnMainMenu => true;
@@ -35,14 +34,14 @@ namespace SuperMonkeBananaOS
             BuildMenuOptions.AppendLine("");
             BuildMenuOptions.AppendLine(selectionHandler.GetOriginalBananaOSSelectionText(1, "[Force : " + force + "]"));
             return BuildMenuOptions.ToString();
-          
+
         }
-        float force;
-        public static bool NoGravBool;
+        public float force;
+        public bool NoGravBool;
 
-       
 
-public override void OnButtonPressed(WatchButtonType buttonType)
+
+        public override void OnButtonPressed(WatchButtonType buttonType)
         {
             switch (buttonType)
             {
@@ -58,14 +57,27 @@ public override void OnButtonPressed(WatchButtonType buttonType)
                     if (selectionHandler.currentIndex == 1)
                     {
                         if (force > 25)
+                        {
                             force -= 1f;
+                        }
+                        else
+                        {
+                            force += 1f;
+                        }
                     }
+
                     break;
                 case WatchButtonType.Left:
                     if (selectionHandler.currentIndex == 1)
                     {
                         if (force < 1)
+                        {
                             force += 1f;
+                        }
+                        else
+                        {
+                            force -= 1f;
+                        }
                     }
                     break;
 
@@ -86,31 +98,17 @@ public override void OnButtonPressed(WatchButtonType buttonType)
             // thanks for the gamemode check dean!
             if (IsEnabled && PhotonNetwork.CurrentRoom.CustomProperties["gameMode"].ToString().Contains("MODDED_"))
             {
-                if (EasyInputs.Rprim)
+
+                if (ControllerInputPoller.instance.rightControllerPrimaryButton)
                 {
                     GorillaLocomotion.Player.Instance.transform.position += GorillaLocomotion.Player.Instance.headCollider.transform.forward * force * Time.deltaTime;
                     GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity = Vector3.zero;
                 }
-                if (EasyInputs.Rsec)
-                {
-                    NoGravBool = !NoGravBool;
-                }
-                if (NoGravBool)
+
+                if (ControllerInputPoller.instance.rightControllerSecondaryButton)
                 {
                     GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += GorillaLocomotion.Player.Instance.bodyCollider.transform.up * 9.9f * Time.deltaTime;
                 }
-            }
-            else
-            {
-                if (EasyInputs.Rprim)
-                {
-                    BananaNotifications.DisplayNotification("You're NOT in a modded", Color.red, Color.white, 1);
-                }
-                if (EasyInputs.Rsec)
-                {
-                    BananaNotifications.DisplayNotification("You're NOT in a modded", Color.red, Color.white, 1);
-                }
-
             }
         }
     }
